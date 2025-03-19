@@ -6,6 +6,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book = Book.find(params[:id])
+    @book_new = Book.new
   end
 
   def edit
@@ -19,6 +21,12 @@ class BooksController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
   end
 
   private
