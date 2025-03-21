@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'home/about' => 'homes#about'
 
   resources :users, only: [:show, :edit, :update, :index, :destroy, :create]
-  resources :books, only: [:create, :index, :show, :edit, :update, :destroy]
+  resources :books, only: [:create, :index, :show, :edit, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+  end
 
 
 end
