@@ -6,6 +6,7 @@
         <th></th>
         <th>Title</th>
         <th>Opinion</th>
+        <th colspan="2"></th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +15,20 @@
           <td><%= link_to image_tag(book.user.get_profile_image(75,75)), user_path(book.user) %></td>
           <td><%= link_to book.title, book %></td>
           <td><%= book.body %></td>
+          <td>
+            <% if book.favorited_by?(current_user) %>
+              <%= link_to book_favorites_path(book),class:"text-danger", method: :delete do %>
+                <i class="fa fa-solid fa-heart"></i>
+                <%= book.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to book_favorites_path(book), method: :post do %>
+                <i class="fa fa-solid fa-heart"></i>
+                <%= book.favorites.count %>
+              <% end %>
+            <% end %>
+          </td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>
